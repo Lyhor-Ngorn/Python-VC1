@@ -1,6 +1,6 @@
 from tkinter import *
 from pygame import mixer
-from playsound import playsound
+mixer.init(44100, -16,2,2048)
 root=Tk()
 root.geometry('1500x900')
 root.resizable(False,False)
@@ -37,11 +37,11 @@ def moveDown(event):
 
 
 def shoootingIt():
-    canvas.move(shooting1,0,-20)
-    canvas.move(shooting2,0,-20)
+    canvas.move(shooting1,0,-40)
+    canvas.move(shooting2,0,-40)
     y=canvas.coords(shooting1)[1]
-    stopShooting = y <=0
-
+    stopShooting = y <0
+    soundObj.play()
     if not stopShooting:
         canvas.after(10,lambda:shoootingIt())
     else :
@@ -56,7 +56,6 @@ def shooting():
     y1 = canvas.coords(ourShip)[1]
     shooting1=canvas.create_image(x1-60,y1+35,image=bullet)
     shooting2=canvas.create_image(x1-2,y1+35,image=bullet)
-    ('VC1/laser.wav')
     shoootingIt()
 def e_move(event):
     global enermy,eachEnermy,x,y
